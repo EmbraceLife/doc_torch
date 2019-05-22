@@ -318,6 +318,27 @@ class Conv2d(_ConvNd):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1,
                  padding=0, dilation=1, groups=1,
                  bias=True, padding_mode='zeros'):
+        """
+        ----what
+        `Conv2d.__init__`:
+            1. create an instance of Conv2d
+            2. non-default inputs: 
+                a. in_channels
+                b. out_channels
+                c. kernel_size
+            3. default inputs:
+                a. stride = 1
+                b. padding = 0
+                c. dilation = 1
+                d. groups = 1
+                e. bias = True
+                f. padding_mode = 'zeros'
+        
+        ----internals
+        1. turn kernel_size, stride, padding, dilation into tuples in which the single integer made a copy of its own, using `_pair`
+        2. instantiate `ConvNd.__init__`
+
+        """
         kernel_size = _pair(kernel_size)
         stride = _pair(stride)
         padding = _pair(padding)
