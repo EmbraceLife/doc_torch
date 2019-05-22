@@ -4,6 +4,13 @@ from itertools import repeat
 
 def _ntuple(n):
     def parse(x):
+        """
+        ----what 
+        `_ntuple(n).parse(x)`
+            1. if x is an instance of container_abcs.Iterable
+                then return x
+            2. if not, then return `tuple(repeat(x,n))`
+        """
         if isinstance(x, container_abcs.Iterable):
             return x
         return tuple(repeat(x, n))
