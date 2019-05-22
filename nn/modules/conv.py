@@ -17,6 +17,27 @@ class _ConvNd(Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride,
                  padding, dilation, transposed, output_padding,
                  groups, bias, padding_mode):
+        """
+        ----what
+        `ConvNd.__int__`
+            1. inherit from `Module.__init__()`
+            2. make sure in_channels and out_channels are divisible by groups
+            3. assign all the input args to be `self.` properties
+            4. create a tensor with shape (out_channels, in_channels//groups, 
+                *kernel_size)
+            5. then this tensor into a Parameter, and assign it to `self.weight`
+            6. if `transposed` true, switch position between out_channels 
+                and in_channels
+            7. if `bias` true, create a Parameter with `out_channels` 
+                and assigned to `self.bias`
+            8. if `bias` not true, make Parameter `bias` None
+            9. finally reset parameters
+
+        ----internals
+        `ConvNd.reset_parameters()`
+        `ConvNd.register_parameter('bias', None)
+        `Parameter(torch.Tensor(..))`
+        """
         super(_ConvNd, self).__init__()
         if in_channels % groups != 0:
             raise ValueError('in_channels must be divisible by groups')
