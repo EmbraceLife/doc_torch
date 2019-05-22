@@ -44,6 +44,23 @@ class Sequential(Module):
     """
 
     def __init__(self, *args):
+        """
+        ----what
+        `Sequential.__init__(*args)`:
+            1. inherit from `Module.__init__()`
+            2. if there is a single arg, and which is an ordered dict, 
+                then loop through all its keys and values, 
+                and add the value to be a submodule and 
+                the key as the submodule name
+            3. otherwise (more than 1 or not OrderedDict), 
+                then enumerate all the items inside `args`, 
+                and add the value as a submodule and the index as its name
+            4. basically all items of `args` become submodules of 
+                the current module or the Sequential instance
+
+        ----internals
+        `Sequential.add_module(name, module)`
+        """ 
         super(Sequential, self).__init__()
         if len(args) == 1 and isinstance(args[0], OrderedDict):
             for key, module in args[0].items():

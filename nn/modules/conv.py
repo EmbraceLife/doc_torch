@@ -357,7 +357,7 @@ class Conv2d(_ConvNd):
         
         ----internals
         1. turn kernel_size, stride, padding, dilation into tuples in which the single integer made a copy of its own, using `_pair`
-        2. instantiate `ConvNd.__init__`
+        2. since all args are prepared, so we can instantiate `ConvNd.__init__`
 
         """
         kernel_size = _pair(kernel_size)
