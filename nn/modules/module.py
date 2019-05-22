@@ -485,6 +485,24 @@ class Module(object):
         return result
 
     def __call__(self, *input, **kwargs):
+         """
+        ----what
+        `Sequential.__call__(*input, **kwargs)`:
+            0. when an instance of Sequential is called like a func
+            1. inherit from `Module.__init__()`
+            2. if there is `self._forward_pre_hooks` available, run the hook
+            3. if `torch._C._get_tracing_state()` is true, do `self._slow_forward`
+                    otherwise, just do `self.forward(*input, **kwargs), get `result`
+            4. if `self._forward_hooks.values()` are available, run the hook
+                    but make sure the hook doesn't return any value
+            5. if `self._backward_hooks` available, 
+                    a. make sure get Tensors out of `result`
+                    b. get `grad_fn` from `result`
+                    c. make `grad_fn` and `_backward_hooks` work together
+            6. return result
+
+        ----internals
+        """
         for hook in self._forward_pre_hooks.values():
             hook(self, input)
         if torch._C._get_tracing_state():
