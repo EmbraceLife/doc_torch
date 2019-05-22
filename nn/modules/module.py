@@ -63,6 +63,24 @@ class Module(object):
     _version = 1
 
     def __init__(self):
+        """
+        ----what
+        `Module.__init__`:
+            1. basically create a bunch of internal properties, which are all ordered dicts
+            2. and set `self.training` to be true
+
+        ----internals
+        `self._backend = thnn_backend`
+        `self._parameters`: a dict for weights and biases
+        `self._buffers`: a dict of ...
+        `self._backward_hooks`: hooks for doing bp
+        `self._forward_hooks`
+        `self._forward_pre_hooks`
+        `self._state_dict_hooks`
+        `self._load_state_dict_pre_hooks`
+        `self._modules`
+        `self.training`
+        """
         self._backend = thnn_backend
         self._parameters = OrderedDict()
         self._buffers = OrderedDict()
