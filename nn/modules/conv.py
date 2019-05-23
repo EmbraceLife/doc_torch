@@ -21,7 +21,9 @@ class _ConvNd(Module):
         ----what
         `_ConvNd.__init__`
             0. prepare properties, and parameters for ConvNd 
-            1. inherit from `Module.__init__()`
+
+        ----procedures
+            1. inherit many ordered dicts from `Module.__init__()`
             2. make sure in_channels and out_channels are divisible by groups
             3. assign all the input args to be `self.` properties
             4. create a tensor with shape (out_channels, in_channels//groups, 

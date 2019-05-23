@@ -33,6 +33,7 @@ class Parameter(torch.Tensor):
         
         ----internal
         torch.Tensor._make_subclass
+            1. built_in func from .cpp file
         """
         if data is None:
             data = torch.Tensor()
