@@ -144,14 +144,24 @@ class Module(object):
             self._buffers[name] = tensor
 
     def register_parameter(self, name, param):
-        r"""Adds a parameter to the module.
+        """
+        ----what
+        Module.register_parameter
+            1. Adds a parameter to the module.
+            2. so that the parameter can be accessed as 
+                an attribute using given name.
 
-        The parameter can be accessed as an attribute using given name.
-
-        Args:
-            name (string): name of the parameter. The parameter can be accessed
+        ----inputs:
+            1. name (string): name of the parameter.
+                The parameter can be accessed
                 from this module using the given name
-            param (Parameter): parameter to be added to the module.
+            2. param (Parameter): 
+                parameter to be added to the module.
+        
+        ----procedures
+            1. check all potential troubles for `name` or `param`
+                to be in
+            2. finally assign `param` into `self._parameters[name]`
         """
         if '_parameters' not in self.__dict__:
             raise AttributeError(
