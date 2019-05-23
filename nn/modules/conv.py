@@ -69,6 +69,18 @@ class _ConvNd(Module):
         self.reset_parameters()
 
     def reset_parameters(self):
+        """
+        ----what 
+        _ConvNd.reset_parameters
+            1. called at the end of _ConvNd.__init__
+            2. to give initialization to both weight and bias
+
+        ----procedure
+            1. does init.kaiming_uniform_ to weight
+            2. if bias is not None, create a `bound` using weight
+                and init._calculate_fan_in_and_fan_out
+            3. does init.uniform_ to bias with `bound`
+        """
         init.kaiming_uniform_(self.weight, a=math.sqrt(5))
         if self.bias is not None:
             fan_in, _ = init._calculate_fan_in_and_fan_out(self.weight)
