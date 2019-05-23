@@ -569,6 +569,21 @@ class Module(object):
             self._load_state_dict_pre_hooks = OrderedDict()
 
     def __getattr__(self, name):
+        """
+        ----what
+        Module.__getattr__
+            1. this method will be called in cases like below
+               `init.kaiming_uniform_(self.weight, a=math.sqrt(5))`
+            2. it basically extracts values from `name`
+
+        ----procedures
+            1. extract all values `_parameters` from 
+                `self._parameters` or  `self.__dict__['_parameters']
+            2. if `name` is a key of `_parameters`, then
+                return `_parameters[name]`
+            3. do the same to `self._buffers`
+            4. do the same to `self._modules`
+        """
         if '_parameters' in self.__dict__:
             _parameters = self.__dict__['_parameters']
             if name in _parameters:
