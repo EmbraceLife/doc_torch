@@ -21,6 +21,19 @@ class Parameter(torch.Tensor):
     """
 
     def __new__(cls, data=None, requires_grad=True):
+        """
+        ----what 
+        Parameter.__new__
+            0. create a parameter from a tensor
+            1. set `requires_grad` true, for backpropagation
+
+        ----procedure
+        1. if `data` is None, then create an empty tensor for `data`
+        2. then `torch.Tensor._make_subclass` add grads to `data`
+        
+        ----internal
+        torch.Tensor._make_subclass
+        """
         if data is None:
             data = torch.Tensor()
         return torch.Tensor._make_subclass(cls, data, requires_grad)
