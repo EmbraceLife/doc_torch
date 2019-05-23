@@ -19,15 +19,16 @@ class _ConvNd(Module):
                  groups, bias, padding_mode):
         """
         ----what
-        `ConvNd.__int__`
+        `ConvNd.__init__`
+            0. prepare properties, and parameters for ConvNd 
             1. inherit from `Module.__init__()`
             2. make sure in_channels and out_channels are divisible by groups
             3. assign all the input args to be `self.` properties
             4. create a tensor with shape (out_channels, in_channels//groups, 
                 *kernel_size)
-            5. then this tensor into a Parameter, and assign it to `self.weight`
+            5. turn this tensor into a Parameter, and assign it to `self.weight`
             6. if `transposed` true, switch position between out_channels 
-                and in_channels
+                and in_channels when create `self.weight`
             7. if `bias` true, create a Parameter with `out_channels` 
                 and assigned to `self.bias`
             8. if `bias` not true, make Parameter `bias` None
@@ -342,12 +343,15 @@ class Conv2d(_ConvNd):
         """
         ----what
         `Conv2d.__init__`:
-            1. create an instance of Conv2d
-            2. non-default inputs: 
+            0. use input-output channels to create a conv2d object 
+            1. turn kernel_size, stride, padding, dilation into tuples in which the single integer made a copy of its own, using `_pair`
+            2. since all args are prepared, so we can instantiate `ConvNd.__init__`
+        ----inputs    
+            1. non-default inputs: 
                 a. in_channels
                 b. out_channels
                 c. kernel_size
-            3. default inputs:
+            2. default inputs:
                 a. stride = 1
                 b. padding = 0
                 c. dilation = 1
@@ -356,9 +360,7 @@ class Conv2d(_ConvNd):
                 f. padding_mode = 'zeros'
         
         ----internals
-        1. turn kernel_size, stride, padding, dilation into tuples in which the single integer made a copy of its own, using `_pair`
-        2. since all args are prepared, so we can instantiate `ConvNd.__init__`
-
+        `ConvNd.__init__`
         """
         kernel_size = _pair(kernel_size)
         stride = _pair(stride)
