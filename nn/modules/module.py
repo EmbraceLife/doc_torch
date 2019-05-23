@@ -575,11 +575,27 @@ class Module(object):
             type(self).__name__, name))
 
     def __setattr__(self, name, value):
+        """
+        ----what 
+        Module.__setattr__
+            1. this method is called when assign a parameter to
+                `self.weight` or `self.bias`
+
+        ----procedure
+            1. define `remove_from`  to remove an item from a dict
+            2. if `value` is an instance of Parameter and not None
+            3. then remove exist `self.name` using `remove_from` 
+            4. and then assign `value` to `self.name` using 
+                `self.register_parameter(name, value)`
+
+        ----example
+        self.weight = Parameter(torch.Tensor(...))
+        """
         def remove_from(*dicts):
             for d in dicts:
                 if name in d:
                     del d[name]
-
+        
         params = self.__dict__.get('_parameters')
         if isinstance(value, Parameter):
             if params is None:
