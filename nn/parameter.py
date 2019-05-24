@@ -25,15 +25,19 @@ class Parameter(torch.Tensor):
         ----what 
         Parameter.__new__
             0. create a parameter from a tensor
-            1. set `requires_grad` true, for backpropagation
+            1. set `requires_grad` true, for getting grads 
 
         ----procedure
         1. if `data` is None, then create an empty tensor for `data`
-        2. then `torch.Tensor._make_subclass` add grads to `data`
+        2. then `torch.Tensor._make_subclass` actually 
+            add grads for `data` 
         
         ----internal
         torch.Tensor._make_subclass
+            0. Instantiates a subclass of torch.Tensor. Used by nn.Parameter()
             1. built_in func from .cpp file
+            2. the function name is THPVariable_make_subclass
+            4. the source can be understood a little.
         """
         if data is None:
             data = torch.Tensor()

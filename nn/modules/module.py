@@ -603,13 +603,14 @@ class Module(object):
         """
         ----what 
         Module.__setattr__
-            1. this method is called when assign a parameter to
-                `self.weight` or `self.bias`
+            1. this method is called when a property 
+                is asked to be assigned.
 
         ----procedure
             1. define `remove_from`  to remove an item from a dict
             2. if `value` is an instance of Parameter and not None
-            3. then remove exist `self.name` using `remove_from` 
+            3. then remove the value of existing `self.name` 
+                using `remove_from` 
             4. and then assign `value` to `self.name` using 
                 `self.register_parameter(name, value)`
 

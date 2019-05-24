@@ -36,6 +36,9 @@ class _ConvNd(Module):
             8. if `bias` not true, make Parameter `bias` None
             9. finally reset parameters
 
+        ----questions
+            1. `groups`: what does it mean?
+
         ----internals
         `ConvNd.reset_parameters()`
         `ConvNd.register_parameter('bias', None)
