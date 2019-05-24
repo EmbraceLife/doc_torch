@@ -574,7 +574,7 @@ class Module(object):
         Module.__getattr__
             1. this method will be called in cases like below
                `init.kaiming_uniform_(self.weight, a=math.sqrt(5))`
-            2. it basically extracts values from `name`
+            2. it basically extracts values from `self.name`
 
         ----procedures
             1. extract all values `_parameters` from 

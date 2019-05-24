@@ -294,29 +294,31 @@ def _calculate_correct_fan(tensor, mode):
 
 
 def kaiming_uniform_(tensor, a=0, mode='fan_in', nonlinearity='leaky_relu'):
-    r"""Fills the input `Tensor` with values according to the method
-    described in `Delving deep into rectifiers: Surpassing human-level
-    performance on ImageNet classification` - He, K. et al. (2015), using a
-    uniform distribution. The resulting tensor will have values sampled from
-    :math:`\mathcal{U}(-\text{bound}, \text{bound})` where
+    """
+    https://pytorch.org/docs/stable/nn.html#torch.nn.init.kaiming_uniform_
+    ----what
+    init.kaiming_uniform_
+        1. initialize a tensor using He initialization 
+            with uniform distribution
 
-    .. math::
-        \text{bound} = \sqrt{\frac{6}{(1 + a^2) \times \text{fan\_in}}}
+    ----inputs
+        1. `a`: a negative slope
+        2. mode – either 'fan_in' (default) or 'fan_out'. 
+            Choosing 'fan_in' preserves the magnitude of 
+            the variance of the weights in the forward pass. 
+            Choosing 'fan_out' preserves the magnitudes 
+            in the backwards pass
 
-    Also known as He initialization.
+    ----procedures
+        1. calc fan_in and fan_out, and choose one based on `mode` 
+        2. choose a way to calc `gain` value based 
+            the nonlinearity type
 
-    Args:
-        tensor: an n-dimensional `torch.Tensor`
-        a: the negative slope of the rectifier used after this layer (0 for ReLU
-            by default)
-        mode: either ``'fan_in'`` (default) or ``'fan_out'``. Choosing ``'fan_in'``
-            preserves the magnitude of the variance of the weights in the
-            forward pass. Choosing ``'fan_out'`` preserves the magnitudes in the
-            backwards pass.
-        nonlinearity: the non-linear function (`nn.functional` name),
-            recommended to use only with ``'relu'`` or ``'leaky_relu'`` (default).
+    ----internals
+        1. init._calculate_correct_fan
+        2. init.calculate_gain 
 
-    Examples:
+    ----Examples:
         >>> w = torch.empty(3, 5)
         >>> nn.init.kaiming_uniform_(w, mode='fan_in', nonlinearity='relu')
     """
