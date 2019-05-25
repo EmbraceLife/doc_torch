@@ -364,8 +364,10 @@ class Conv2d(_ConvNd):
             0. use input-output channels to create a conv2d object 
          
         ----procedures 
-            1. turn kernel_size, stride, padding, dilation into tuples in which the single integer made a copy of its own, using `_pair`
-            2. since all args are prepared, so we can instantiate `_ConvNd.__init__`
+            1. turn kernel_size, stride, padding, dilation into tuples 
+                in which the single integer made a copy of its own, using `_pair`
+            2. since all args are prepared, 
+                so we can instantiate `_ConvNd.__init__`
       
         ----inputs    
             1. non-default inputs: 

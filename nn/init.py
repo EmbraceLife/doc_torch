@@ -75,15 +75,21 @@ def calculate_gain(nonlinearity, param=None):
 @weak_script
 def uniform_(tensor, a=0., b=1.):
     # type: (Tensor, float, float) -> Tensor
-    r"""Fills the input Tensor with values drawn from the uniform
-    distribution :math:`\mathcal{U}(a, b)`.
+    """
+    ----what 
+    init.uniform_
+        1. create a uniform distribution between a and b
+        2. Fills the input Tensor with values from this distribution
 
-    Args:
+    ----procedure
+        1. just run `_no_grad_uniform_(tensor, a, b)` 
+
+    ----inputs:
         tensor: an n-dimensional `torch.Tensor`
         a: the lower bound of the uniform distribution
         b: the upper bound of the uniform distribution
 
-    Examples:
+    ----Examples:
         >>> w = torch.empty(3, 5)
         >>> nn.init.uniform_(w)
     """
