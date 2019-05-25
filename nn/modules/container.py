@@ -47,14 +47,18 @@ class Sequential(Module):
         """
         ----what
         `Sequential.__init__(*args)`:
+            1. create a sequential object to collect all layers as 
+                its submodules
+
+        ----procedures 
             1. inherit from `Module.__init__()`
-            2. if there is a single arg, and which is an ordered dict, 
-                then loop through all its keys and values, 
-                and add the value to be a submodule and 
-                the key as the submodule name
-            3. otherwise (more than 1 or not OrderedDict), 
-                then enumerate all the items inside `args`, 
-                and add the value as a submodule and the index as its name
+            2. if there is a single item in `arg` which is an ordered dict, 
+                a. then loop through all its keys and values, 
+                b. and add the value to be a submodule and 
+                c. use the key as the submodule name
+            3. otherwise (arg has more than 1 items or not OrderedDict), 
+                a. then enumerate all the items inside `args`, 
+                b. and add `module` as a submodule and the `idx` as its name
             4. basically all items of `args` become submodules of 
                 the current module or the Sequential instance
 
