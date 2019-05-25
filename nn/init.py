@@ -207,6 +207,25 @@ def dirac_(tensor):
 
 @weak_script
 def _calculate_fan_in_and_fan_out(tensor):
+    """
+    ----what
+    init._calculate_fan_in_and_fan_out
+        1. calc and return `fan_in` and `fan_out`
+
+    ----procedure
+        1. get the number of dimensions of `tensor` under `dimensions`
+        2. make sure `dimensions` not less than 2
+        3. when `dimensions==2`, 
+            set `fan_in = tensor.size(1)`, `fan_out = tensor.size(0)`
+        4. when dimensions > 2,
+            a. get the number of input featuremaps, `num_input_fmaps` 
+            b. get the number of output featurempas, `num_output_fmaps`
+            c. get the number of digits in receptive_field, 
+                `receptive_field_size`
+            d. calc `fan_in` = num_input_fmaps * receptive_field_size
+            e. calc `fan_out` = num_output_fmaps * receptive_field_size
+        5. return `fan_in`, `fan_out`
+    """
     dimensions = tensor.dim()
     if dimensions < 2:
         raise ValueError("Fan in and fan out can not be computed for tensor with fewer than 2 dimensions")
