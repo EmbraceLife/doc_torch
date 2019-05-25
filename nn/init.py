@@ -11,6 +11,17 @@ from .._jit_internal import weak_script
 # managers, so these need to be implemented as builtins. Using these wrappers
 # lets us keep those builtins small and re-usable.
 def _no_grad_uniform_(tensor, a, b):
+    """
+    ----what
+    init._no_grad_uniform(tensor, a, b)
+        1. fill a tensor with uniform distribution from range a to b
+        2. without any change to its gradient
+    
+    ----procedure
+        1. `with torch.no_grad()` to turn off gradient
+        2. fill uniform values to `tensor`
+        3. `with torch.no_grad()` will turn gradient on
+    """
     with torch.no_grad():
         return tensor.uniform_(a, b)
 
