@@ -80,7 +80,8 @@ class _ConvNd(Module):
 
         ----procedure
             1. does init.kaiming_uniform_ to weight
-            2. if bias is not None, create a `bound` using weight
+            2. if `self.bias` is not None, create a `bound` 
+                using `self.weight`
                 and init._calculate_fan_in_and_fan_out
             3. does init.uniform_ to bias with `bound`
         """

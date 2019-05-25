@@ -313,6 +313,12 @@ def kaiming_uniform_(tensor, a=0, mode='fan_in', nonlinearity='leaky_relu'):
         1. calc fan_in and fan_out, and choose one based on `mode` 
         2. choose a way to calc `gain` value based 
             the nonlinearity type
+        3. use `gain`, `fan` to calc `std`
+        4. use `std` to calc `bound`
+        5. a. disable grad, then 
+           b. do uniform distribution on `tensor` 
+            with range (-bound, bound)
+           c.  finally enable grad
 
     ----internals
         1. init._calculate_correct_fan
