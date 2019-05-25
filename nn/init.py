@@ -336,6 +336,7 @@ def kaiming_uniform_(tensor, a=0, mode='fan_in', nonlinearity='leaky_relu'):
     init.kaiming_uniform_
         1. initialize a tensor using He initialization 
             with uniform distribution
+        2. transform the `tensor` and in_place save it
 
     ----inputs
         1. `a`: a negative slope
