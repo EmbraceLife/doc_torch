@@ -193,14 +193,23 @@ class Module(object):
             self._parameters[name] = param
 
     def add_module(self, name, module):
-        r"""Adds a child module to the current module.
-
-        The module can be accessed as an attribute using the given name.
-
-        Args:
-            name (string): name of the child module. The child module can be
+        """
+        ----what
+        Module.add_module(name, module)
+            1. Adds a child module to the current module.
+        
+        ----procedures
+            1. make sure `module` is an instance of Module
+            2. make sure `name` is a string
+            3. make sure no self.name already exist
+            4. make sure `name` is not a hidden name
+            5. make sure `name` is not empty
+            6. add `module` onto `self._modules[name]`
+            
+        ----input Args:
+            1. name (string): name of the child module. The child module can be
                 accessed from this module using the given name
-            module (Module): child module to be added to the module.
+            2. module (Module): child module to be added to the module.
         """
         if not isinstance(module, Module) and module is not None:
             raise TypeError("{} is not a Module subclass".format(
