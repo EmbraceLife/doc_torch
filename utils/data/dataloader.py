@@ -142,6 +142,28 @@ class DataLoader(object):
                  batch_sampler=None, num_workers=0, collate_fn=default_collate,
                  pin_memory=False, drop_last=False, timeout=0,
                  worker_init_fn=None):
+        """
+        ----what 
+        DataLoader.__init__
+            1. to create a Dataloader by 
+                a. Combines a dataset and a sampler, and 
+                b. many other attributes/properties together 
+        
+       ----procedures
+            1. put all inputs args into properties of this DataLoader
+            2. make sure `timeout` not negative
+            3. make sure `batch_sampler` and (`batch_size`, `shuffle`, `sampler`
+                and `drop_last`) are mutually exclusive
+            4. make sure `sampler` and `shuffle` are mutally exclusive
+            5. make sure `num_workers` not negative
+            6. if `batch_sampler`, `sampler` are None, 
+                a. if `shuffle` True, create sampler with `RandomSampler(dataset)`
+                b. if False, create sampler with `SequentialSampler(dataset)`
+            7. if `batch_sampler` is None
+                a. create a BatchSampler(sampler, batch_size, drop_last)
+            8. assign `sampler`, `batch_sampler` to `self` as properties
+            9. set `self.__initialized` True
+        """
         self.dataset = dataset
         self.batch_size = batch_size
         self.num_workers = num_workers
