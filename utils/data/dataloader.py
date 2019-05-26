@@ -192,6 +192,10 @@ class DataLoader(object):
             worker_init_fn (callable, optional): If not ``None``, this will be called on each
                 worker subprocess with the worker id (an int in ``[0, num_workers - 1]``) as
                 input, after seeding and before data loading. (default: ``None``)
+       
+        ----internals
+            Note:
+            all samplers are created with C++, code can be searched and docs are good.
         """
         self.dataset = dataset
         self.batch_size = batch_size
