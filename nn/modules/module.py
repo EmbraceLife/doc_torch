@@ -529,7 +529,6 @@ class Module(object):
             1. basically run avaliable hook functions and forward function
 
         ----procedures    
-            1. inherit from `Module.__init__()`
             2. if there is `self._forward_pre_hooks` available, run the hook
             3. if `torch._C._get_tracing_state()` is true, do `self._slow_forward`
                     otherwise, just do `self.forward(*input, **kwargs), get `result`
