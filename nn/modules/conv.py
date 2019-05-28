@@ -395,6 +395,18 @@ class Conv2d(_ConvNd):
 
     @weak_script_method
     def forward(self, input):
+        """
+        ----what 
+        `Conv2d.forward(input)`
+            1. run `F.conv2d` on `input`
+            2. `F.conv2d` is written in cpp
+
+        ----procedure
+        1. if `self.padding_mode` is 'circular', 
+            a. create `expanded_padding`
+            b. then do padding with `F.pad` and then run `F.conv2d`
+        2. otherwise, just run `F.conv2d`
+        """
         if self.padding_mode == 'circular':
             expanded_padding = ((self.padding[1] + 1) // 2, self.padding[1] // 2,
                                 (self.padding[0] + 1) // 2, self.padding[0] // 2)
