@@ -109,6 +109,21 @@ class Sequential(Module):
         return keys
 
     def forward(self, input):
+        """
+        ----what
+        Sequential.forward(input)
+            1. apply every module/layer inside `self` to input
+
+        ----inputs
+        `input`: x
+
+        ----procedure
+            1. loop through every module stored inside `self`
+            2. apply each module onto input, using `Module.__call__`
+            3. inside will run this module's `forward(input)` to ouput
+            3. use the output as the new input and run for next module
+            4. return final input
+        """
         for module in self._modules.values():
             input = module(input)
         return input
